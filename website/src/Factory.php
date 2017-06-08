@@ -1,6 +1,6 @@
 <?php 
 
-namespace mineichen;
+namespace jrothert;
 
 class Factory 
 {

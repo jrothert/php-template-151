@@ -7,7 +7,7 @@ session_start();
 
 require_once("../vendor/autoload.php");
 $config = parse_ini_file(__DIR__ . "/../config.ini", true);
-$factory = new mineichen\Factory($config);
+$factory = new jrothert\Factory($config);
 
 switch($_SERVER["REQUEST_URI"]) {
 	case "/":
@@ -28,5 +28,8 @@ switch($_SERVER["REQUEST_URI"]) {
 			break;
 		}
 		echo "Not Found";
+		
+	$hash = password_hash($password, PASSWORD_DEFAULT);
+	$success = password_verify($password, $hash);
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace mineichen;
+namespace jrothert;
 
 /**
  * Simple Template-Engine which provides arguments into a template,

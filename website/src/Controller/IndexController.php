@@ -1,8 +1,8 @@
 <?php
 
-namespace mineichen\Controller;
+namespace jrothert\Controller;
 
-use mineichen\SimpleTemplateEngine;
+use jrothert\SimpleTemplateEngine;
 
 class IndexController 
 {

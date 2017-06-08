@@ -1,9 +1,9 @@
 {
-    "name": "Datenbankprojekt",
+    "name": "jrothert/Datenbankprojekt",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "mineichen\\": "src/"
+            "jrothert\\": "src/"
         }
     },
     "require": {
