@@ -1,23 +1,35 @@
 <?php
 
 error_reporting(E_ALL);
+session_start();
+
+//echo __DIR__; die();
 
 require_once("../vendor/autoload.php");
-$tmpl = new ihrname\SimpleTemplateEngine(__DIR__ . "/../templates/");
+$config = parse_ini_file(__DIR__ . "/../config.ini", true);
+$factory = new jrothert\Factory($config);
 
 switch($_SERVER["REQUEST_URI"]) {
-	case "/testroute":
-		echo "Test blablabla";
-		break;
 	case "/":
-		(new ihrname\Controller\IndexController($tmpl))->homepage();
+		$factory->getIndexController()->homepage();
+		break;
+	case "/login":
+		$cnt = $factory->getLoginController();
+		if($_SERVER["REQUEST_METHOD"] === "GET") {
+			$cnt->showLogin();
+		} else {
+			$cnt->login($_POST);
+		}
 		break;
 	default:
 		$matches = [];
 		if(preg_match("|^/hello/(.+)$|", $_SERVER["REQUEST_URI"], $matches)) {
-			(new ihrname\Controller\IndexController($tmpl))->greet($matches[1]);
+			$factory->getIndexController()->greet($matches[1]);
 			break;
 		}
 		echo "Not Found";
+		
+	$hash = password_hash($password, PASSWORD_DEFAULT);
+	$success = password_verify($password, $hash);
 }
 

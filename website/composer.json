@@ -1,12 +1,13 @@
 {
-    "name": "ihrname/Datenbankprojekt",
+    "name": "jrothert/Datenbankprojekt",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "ihrname\\": "src/"
+            "jrothert\\": "src/"
         }
     },
     "require": {
-        "swiftmailer/swiftmailer": "v5.4.*"
+        "swiftmailer/swiftmailer": "v5.4.*",
+        "twig/twig": "~2.0"
     }
 }

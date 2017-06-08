@@ -1,8 +1,8 @@
 <?php
 
-namespace ihrname\Controller;
+namespace jrothert\Controller;
 
-use ihrname\SimpleTemplateEngine;
+use jrothert\SimpleTemplateEngine;
 
 class IndexController 
 {
@@ -14,16 +14,16 @@ class IndexController
   /**
    * @param ihrname\SimpleTemplateEngine
    */
-  public function __construct(SimpleTemplateEngine $template)
+  public function __construct(\Twig_Environment $template)
   {
      $this->template = $template;
   }
 
   public function homepage() {
-    echo "INDEX";
+    echo (array_key_exists("email", $_SESSION)) ? "Welcome " . $_SESSION["email"] : "Hello Mr. X";
   }
 
   public function greet($name) {
-  	echo $this->template->render("hello.html.php", ["name" => $name]);
+  	echo $this->template->render("hello.html.php", ["name" => "<b>" . $name . "</b>"]);
   }
 }
