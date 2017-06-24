@@ -1,8 +1,8 @@
 <?php
 
-namespace jrothert\Service\Login;
+namespace jrothert\Service;
 
 interface LoginService
 {
-   public function authenticate($email, $password);
+	public function authenticator($email);
 }

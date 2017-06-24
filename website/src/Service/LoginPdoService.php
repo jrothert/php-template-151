@@ -1,28 +1,21 @@
 <?php
-
-namespace jrothert\Service\Login;
-
-class LoginPdoService implements LoginService
-{
-    /**
-     * @var \PDO
-     */
-    private $pdo;
-
-    public function __construct(\PDO $pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
-    public function authenticate($email, $password) 
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM user WHERE email=? AND password=?");
-        $stmt->bindValue(1, $email);
-        $stmt->bindValue(2, $password);
-        $stmt->execute();
-
-        return $stmt->rowCount() == 1;
-        
-
-    }
+namespace jrothert\Service;
+use jrothert\Entity\UserEntity;
+class LoginPdoService implements LoginService {
+	private $pdo;
+	public function __construct(\PDO $pdo) {
+		$this->pdo = $pdo;
+	}
+	public function authenticator($email) {
+		$stmt = $this->pdo->prepare ( "SELECT * FROM user WHERE email=?");
+		$stmt->bindValue ( 1, $email );
+		$stmt->execute ();
+		$obj = $stmt->fetchObject ();
+		if ($obj) {
+			$user = new UserEntity ($obj->email, $obj->password, $obj->activated, $obj->activationstring );
+			return $user;
+		} else {
+			return $obj;
+		}
+	}
 }
