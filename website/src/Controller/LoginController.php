@@ -1,9 +1,9 @@
 <?php
 
-namespace mineichen\Controller;
+namespace jrothert\Controller;
 
-use mineichen\SimpleTemplateEngine;
-use mineichen\Service\Login\LoginService;
+use jrothert\SimpleTemplateEngine;
+use jrothert\Service\Login\LoginService;
 
 class LoginController 
 {
@@ -30,19 +30,25 @@ class LoginController
   }
   public function login(array $data)
   {
-  	if(!array_key_exists("email", $data) OR !array_key_exists("password", $data)) {
-  		$this->showLogin();
-  		return;
+  	if(array_key_exists("email", $data) OR array_key_exists("password", $data)) {
+  		if($this->loginService->authenticate($data["email"], $data["password"])) {
+  			$_SESSION["email"] = $data["email"];
+  			header('Location: /');
+  		}
   	}
   	
-  	if($this->loginService->authenticate($data["email"], $data["password"])) {
-  		header('Location: /');
-  	} else {
+  	 else {
   		echo $this->template->render("login.html.php", [
   			"email" => $data["email"]
   		]);
   	}
   	
+  }
+  public function logout($token) {
+  	if ($this->session->compareToken ( $token )) {
+  		$this->session->unset ();
+  		header ( "Location: /" );
+  	}
   }
 }
 

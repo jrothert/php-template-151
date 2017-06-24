@@ -20,7 +20,8 @@ class IndexController
   }
 
   public function homepage() {
-    echo (array_key_exists("email", $_SESSION)) ? "Welcome " . $_SESSION["email"] : "Hello Mr. X";
+    echo $this->template->render("hello.html.php", [ 
+				"email" => (array_key_exists ( "email", $_SESSION )) ? $_SESSION ["email"] : ""]);
   }
 
   public function greet($name) {

@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-	Das kommt aus meinem ersten Template<br />
-	Hallo {{ name|raw }}
+	Hallo {{ email|raw }}<br />
+	
+	{% for array in topicService.getAllTopics() %}
+	<li><a href="/topic/{{ array[0] }}">{{ array[0] }}</a></li>
+	{% endfor %}
+	
 {% endblock %}
 
 {% block title %}
-	{{ parent() }} - Meine tolle Seite
+	Home - Personal Trainer by {{ parent() }}
 {% endblock %}

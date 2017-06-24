@@ -1,8 +1,8 @@
 <?php
 
-namespace mineichen\Service\Login;
+namespace jrothert\Service\Login;
 
 interface LoginService
 {
-   public function authenticate($username, $password);
+   public function authenticate($email, $password);
 }
